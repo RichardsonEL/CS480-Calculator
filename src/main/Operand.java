@@ -12,7 +12,6 @@ public class Operand implements Token{
 	private double value;
 	
 	public Operand(String s) {
-		System.out.println(s);
 		this.value = Double.valueOf(s);
 	}
 	
@@ -20,7 +19,31 @@ public class Operand implements Token{
 		return value;
 	}
 	
+	public void setValue(double x) {
+		this.value = x;
+	}
+	
 	public boolean isOperator() {
 		return false;
+	}
+
+	public String getType() {
+		return null;
+	}
+
+	public int getPrecidence() {
+		return 0;
+	}
+
+	public double operate(double x) {
+		return 0;
+	}
+
+	public double operate(double x, double y) {
+		return 0;
+	}
+	
+	public String toString() {
+		return ("" + this.value);
 	}
 }

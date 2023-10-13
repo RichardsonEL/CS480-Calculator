@@ -13,7 +13,6 @@ public class Operator implements Token{
 	private int precidence;
 	
 	public Operator(String s) {
-		System.out.println(s);
 		this.type = s.toLowerCase();
 		if(s.equals("{") || s.equals("}")) {
 			this.precidence = 5;
@@ -49,7 +48,7 @@ public class Operator implements Token{
 			case "*":
 				return (x*y);
 			case "/":
-				if(y != 0) {
+				if(y == 0) {
 					System.out.println("ERROR: Cannot divide by zero.");
 					System.exit(0);
 					return 0;
@@ -84,5 +83,16 @@ public class Operator implements Token{
 	
 	public boolean isOperator() {
 		return true;
+	}
+
+	public double getValue() {
+		return 0;
+	}
+
+	public void setValue(double x) {		
+	}
+	
+	public String toString() {
+		return this.type;
 	}
 }

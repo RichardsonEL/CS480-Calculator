@@ -62,6 +62,8 @@ public class CalculatorMain {
 						tokenLength = 0;
 					}
 				}
+			} else if(equation.charAt(i) == '=' && i == (equation.length() - 1)) {
+				//Skip token for equals sign if input at end of equation.
 			//Else add the single symbol character as an operator.
 			} else {
 				tokens.add(new Operator(equation.substring(i, i+1)));
@@ -76,8 +78,62 @@ public class CalculatorMain {
 			Token t = tokens.pop();
 			if(!(t.isOperator())) {
 				output.add(t);
+			} else if(t.isOperator()) {
+				if(!(operators.isEmpty())) {
+					while(!(operators.isEmpty()) && ((!(operators.peek().getType().equals("(")) && 
+							(operators.peek().getPrecidence() > t.getPrecidence())) || 
+							(operators.peek().getPrecidence() == t.getPrecidence() && !(t.getType().equals("^"))))) {
+						output.add(operators.pop());
+					}
+				}
+				operators.push(t);
+			}
+			if(t.isOperator() && t.getType().equals("(")) {
+				operators.push(t);
+			}
+			if(t.isOperator() && t.getType().equals(")")) {
+				while(!(operators.isEmpty()) && !(operators.peek().getType().equals("("))) {
+					output.add(operators.pop());
+				}
+				if(!(operators.isEmpty()) && operators.peek().getType().equals("(")) {
+					operators.pop();
+				}
 			}
 		}
+		while(!(operators.isEmpty())) {
+			if(operators.peek().equals("(") || operators.peek().equals(")")) {
+				operators.pop();
+			} else {
+				output.add(operators.pop());
+			}
+		}
+		
+		//Calculate result using reverse Polish notation
+		double result = 0;
+		for(int i = 0; i < output.size(); i++) {
+			
+			if(output.get(i).isOperator()) {
+				if(output.get(i).getType().equals("(") || output.get(i).getType().equals(")")) {
+					output.remove(i);
+					i--;
+				} else {
+				if(i > 0 && (output.get(i).getType().equals("sin") || output.get(i).getType().equals("cos") || output.get(i).getType().equals("tan") || output.get(i).getType().equals("ln") || output.get(i).getType().equals("log"))) {
+					result = output.get(i).operate(output.get(i-1).getValue());
+					output.get(i-1).setValue(result);
+					output.remove(i);
+					i--;
+				} else if(i > 1){
+					result = output.get(i).operate(output.get(i-2).getValue(), output.get(i-1).getValue());
+					output.get(i-2).setValue(result);
+					output.remove(i);
+					output.remove(i-1);
+					i = i-2;
+				}
+				}
+			}
+			
+		}
+		System.out.println("Result: " + result);
 		
 		input.close();
 	}
