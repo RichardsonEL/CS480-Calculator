@@ -1,12 +1,18 @@
+/* Eland Richardson
+ * Lab 2
+ * CS 480
+ * 10/13/2023
+ * Calculator Operand Class
+ */
+
 package main;
 
-public class Operand extends Token{
+public class Operand implements Token{
 
 	private double value;
 	
-	public Operand(String token) {
-		
-		
+	public Operand(String s) {
+		System.out.println(s);
 	}
 	
 }
