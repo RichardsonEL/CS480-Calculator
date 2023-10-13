@@ -9,6 +9,6 @@ package main;
 
 public interface Token {
 
-
+	public boolean isOperator();
 	
 }

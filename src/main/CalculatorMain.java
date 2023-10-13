@@ -70,7 +70,14 @@ public class CalculatorMain {
 		}
 		
 		//Organize tokens using Shunting Yard algorithm.
-		
+		LinkedList<Token> output = new LinkedList<Token>();
+		Stack<Token> operators = new Stack<Token>();
+		while(!(tokens.isEmpty())) {
+			Token t = tokens.pop();
+			if(!(t.isOperator())) {
+				output.add(t);
+			}
+		}
 		
 		input.close();
 	}

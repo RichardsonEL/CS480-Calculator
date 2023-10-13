@@ -13,6 +13,14 @@ public class Operand implements Token{
 	
 	public Operand(String s) {
 		System.out.println(s);
+		this.value = Double.valueOf(s);
 	}
 	
+	public double getValue() {
+		return value;
+	}
+	
+	public boolean isOperator() {
+		return false;
+	}
 }
