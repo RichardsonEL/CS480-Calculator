@@ -27,7 +27,8 @@ public class Operator implements Token{
 		} else if(s.equals("+") || s.equals("-")) {
 			this.precidence = 0;
 		} else {
-			this.precidence = -1;
+			System.out.println("ERROR: Operator " + s + " is not a valid operator. Please try again.");
+			System.exit(0);
 		}
 	}
 	

@@ -12,7 +12,13 @@ public class Operand implements Token{
 	private double value;
 	
 	public Operand(String s) {
-		this.value = Double.valueOf(s);
+		try {
+			this.value = Double.valueOf(s);
+		}
+		catch(Exception e) {
+			System.out.println("ERROR: Number " + s + " is not formatted correctly. Please try again.");
+			System.exit(0);
+		}
 	}
 	
 	public double getValue() {

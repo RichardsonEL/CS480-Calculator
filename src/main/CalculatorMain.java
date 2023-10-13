@@ -92,9 +92,15 @@ public class CalculatorMain {
 				operators.push(t);
 			}
 			if(t.isOperator() && t.getType().equals(")")) {
-				while(!(operators.isEmpty()) && !(operators.peek().getType().equals("("))) {
-					output.add(operators.pop());
-				}
+				//try {
+					while(!(operators.isEmpty()) && !(operators.peek().getType().equals("("))) {
+						output.add(operators.pop());
+					}
+				//}
+				//catch(Exception e) {
+					//System.out.println("ERROR: Parenthesis are mismatched. Please try again.");
+					//System.exit(0);
+				//}
 				if(!(operators.isEmpty()) && operators.peek().getType().equals("(")) {
 					operators.pop();
 				}
